@@ -39,15 +39,15 @@ async fn accept_connections(listener: TcpListener, global_ctx: GlobalContext) {
     }
 }
 
-static mut LAST_PLAYER_COUNT: usize = 0;
-
 async fn update(global_ctx: GlobalContext) {
     let players = global_ctx.players.lock().await;
+    let mut player_count = global_ctx.player_count.lock().await;
 
-    if players.len() != unsafe { LAST_PLAYER_COUNT } {
+    if players.len() != player_count.get() {
         println!("Há {} jogadores conectados!", players.len());
-        unsafe { LAST_PLAYER_COUNT = players.len() };
+        player_count.set(players.len());
     }
 
+    drop(player_count);
     drop(players);
 }

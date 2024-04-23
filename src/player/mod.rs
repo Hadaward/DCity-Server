@@ -29,7 +29,7 @@ impl Player {
     }
 
     pub async fn handle_data(&self, buf: Vec<u8>) -> Result<(), Box<dyn Error>> {
-        println!("Got {} bytes from {}:\n{}", buf.len(), self.stream.lock().await.peer_addr()?, String::from_utf8(buf).expect("failed to convert buffer into utf8 string"));
+        //println!("Got {} bytes from {}:\n{}", buf.len(), self.stream.lock().await.peer_addr()?, String::from_utf8(buf).expect("failed to convert buffer into utf8 string"));
         Ok(())
     }
 
